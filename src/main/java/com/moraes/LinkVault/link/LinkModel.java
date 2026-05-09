@@ -2,6 +2,9 @@ package com.moraes.LinkVault.link;
 
 import java.time.Instant;
 
+import com.moraes.LinkVault.link.dto.LinkRequestDTO;
+import com.moraes.LinkVault.link.dto.LinkResponseDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +34,8 @@ public class LinkModel {
 		createdAt = Instant.now();
 		updatedAt = Instant.now();
 	}
+
+	public LinkModel(){}
 	
 	
 	public Integer getid() {
@@ -44,7 +49,7 @@ public class LinkModel {
 	public String getDescription() {
 		return linkDescription;
 	}
-	
+
 	public Instant updated() {
 		return updatedAt;
 	}
@@ -52,11 +57,23 @@ public class LinkModel {
 	public Instant created() {
 		return createdAt;
 	}
+
+	public void update(String link, String description) {
+		this.link = link;
+		linkDescription = description;
+		updatedAt = Instant.now();
+	}
+
+	public static LinkModel of(LinkRequestDTO dto) {
+		return new LinkModel(dto.link(), dto.description());
+	}
+
+	public static LinkModel of(LinkResponseDTO dto) {
+		return new LinkModel(dto.link(), dto.description());
+	}
 	
 	@Override
 	public String toString() {
 		return String.valueOf(link) + String.valueOf(linkDescription);
-				
-				
 	}
 }
