@@ -1,10 +1,10 @@
 package com.moraes.LinkVault.link;
 
 
-import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Pageable;
 import com.moraes.LinkVault.link.dto.LinkRequestDTO;
 import com.moraes.LinkVault.link.dto.LinkResponseDTO;
 
@@ -20,26 +20,22 @@ public class LinkService {
         this.repository = repository;
     }    
 
-    public LinkResponseDTO save(LinkRequestDTO dto) throws Exception {
+    public LinkResponseDTO save(LinkRequestDTO dto) {
 
-        try{
+        
             LinkModel model = LinkModel.of(dto);
 
             LinkModel created =repository.save(model);
 
             return LinkResponseDTO.from(created);
 
-        } catch(Exception e) {
-            throw new Exception("Erro ao salvar link", e);
-        }
     }
 
-    public List<LinkResponseDTO> getAll() {
+    public Page<LinkResponseDTO> getAll(Pageable pageable) {
         
-        return repository.findAll()
-        .stream()
-        .map(LinkResponseDTO::from)
-        .toList();
+        return repository.findAll(pageable)
+        .map(LinkResponseDTO::from);
+         
     }
     
 
