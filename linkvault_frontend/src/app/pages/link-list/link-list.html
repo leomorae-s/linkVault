@@ -1,0 +1,44 @@
+<div class="page-container">
+  <div class="page-header">
+    <h2 class="page-title">Meus Links</h2>
+    <button nz-button nzType="primary" routerLink="/new">
+      <span nz-icon nzType="plus"></span>
+      Novo Link
+    </button>
+  </div>
+
+  <nz-table [nzData]="links" [nzBordered]="false" [nzSize]="'middle'">
+    <thead>
+      <tr>
+        <th>URL</th>
+        <th>Descrição</th>
+        <th nzWidth="150px">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of links; track item.id) {
+        <tr>
+          <td>
+            <a [href]="item.link" target="_blank" rel="noopener">{{ item.link }}</a>
+          </td>
+          <td>{{ item.description || '—' }}</td>
+          <td>
+            <div class="row-actions">
+              <button nz-button nzType="link" (click)="edit(item.id)">Editar</button>
+              <button
+                nz-button
+                nzType="link"
+                nzDanger
+                nz-popconfirm
+                nzPopconfirmTitle="Deseja excluir este link?"
+                (nzOnConfirm)="delete(item.id)"
+              >
+                Excluir
+              </button>
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </nz-table>
+</div>
