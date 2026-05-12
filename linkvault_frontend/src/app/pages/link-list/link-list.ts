@@ -11,7 +11,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
   standalone: true,
   imports: [NzTableModule, NzButtonModule, NzPopconfirmModule, RouterModule],
   templateUrl: './link-list.html',
-  styleUrl: './link-list.css',
+  //styleUrl: './link-list.css',
 })
 export class LinkList implements OnInit{
 

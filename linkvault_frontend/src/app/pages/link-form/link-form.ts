@@ -10,7 +10,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   selector: 'app-link-form',
   imports: [ReactiveFormsModule, NzFormModule, NzInputModule, NzButtonModule],
   templateUrl: './link-form.html',
-  styleUrl: './link-form.css',
+  //styleUrl: './link-form.css',
 })
 export class LinkForm implements OnInit {
 

@@ -1,5 +1,5 @@
-<div class="form-card">
-  <h2 class="form-title">{{ editingId ? 'Editar Link' : 'Novo Link' }}</h2>
+<div class="max-w-[480px] my-12 mx-auto p-8 bg-white rounded-lg border border-[#f0f0f0 shadow-sm]">
+  <h2 class="text-lg font-medium mb-6 text-[#262626]">{{ editingId ? 'Editar Link' : 'Novo Link' }}</h2>
 
   <form nz-form nzLayout="vertical" [formGroup]="form" (ngSubmit)="submit()">
     <nz-form-item>
@@ -16,7 +16,7 @@
       </nz-form-control>
     </nz-form-item>
 
-    <div class="form-footer">
+    <div class="flex justify-end gap-2 mt-2">
       <button nz-button nzType="default" type="button" (click)="cancel()">Cancelar</button>
       <button nz-button nzType="primary" type="submit" [disabled]="form.invalid">Salvar</button>
     </div>
