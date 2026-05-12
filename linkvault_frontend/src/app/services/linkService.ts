@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { enviroment } from '../../enviroment/enviroment';
 
 export interface Link {
   id: number;
@@ -28,7 +29,7 @@ export interface Page<T> {
   providedIn: 'root',
 })
 export class LinkService {
-  private readonly API = 'http://172.19.0.6:8080/link';
+  private readonly API = enviroment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
