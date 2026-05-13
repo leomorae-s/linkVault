@@ -74,7 +74,7 @@ public class LinkController {
         logger.log(Level.INFO, "Requisição recebida, id: "+id);
         service.deleteById(id);
 
-        return ResponseEntity.ok("Link excluido com sucesso");
+        return ResponseEntity.status(204).build();
     }
 
     @PutMapping("/{id}")
