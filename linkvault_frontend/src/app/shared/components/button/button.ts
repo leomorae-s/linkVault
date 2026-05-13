@@ -29,10 +29,10 @@ export class Button {
     };
 
     const variants: Record<ButtonVariant, string> = {
-      primary:   'bg-[#f5a623] text-black shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000]',
+      primary: 'bg-[#f5a623] text-black shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000]',
       secondary: 'bg-[#f0ebe0] text-black shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000]',
-      danger:    'bg-black text-[#f5a623] shadow-[4px_4px_0_#f5a623] hover:shadow-[2px_2px_0_#f5a623]',
-      ghost:     'bg-transparent text-black hover:bg-black hover:text-[#f5a623]',
+      danger: 'bg-black text-[#f5a623] shadow-[4px_4px_0_#f5a623] hover:shadow-[2px_2px_0_#f5a623]',
+      ghost: 'bg-transparent text-black hover:bg-black hover:text-[#f5a623]',
     };
 
     return `${base} ${sizes[this.size]} ${variants[this.variant]}`;

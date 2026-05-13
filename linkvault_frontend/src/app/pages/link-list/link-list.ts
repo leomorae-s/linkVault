@@ -13,10 +13,10 @@ export class LinkList implements OnInit {
   links: Link[] = [];
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private service: LinkService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadLinks();
@@ -27,7 +27,7 @@ export class LinkList implements OnInit {
       next: (page) => {
         if (page && page.content) {
           this.links = page.content;
-          this.cdr.detectChanges(); 
+          this.cdr.detectChanges();
         }
       },
       error: (err) => console.error('Erro ao carregar links:', err)

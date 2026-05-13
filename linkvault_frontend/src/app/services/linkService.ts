@@ -43,7 +43,7 @@ export class LinkService {
 
   getAll(): Observable<any> {
     return this.http.get<any>(this.API);
-    
+
   }
 
   save(dto: LinkRequest): Observable<void> {
