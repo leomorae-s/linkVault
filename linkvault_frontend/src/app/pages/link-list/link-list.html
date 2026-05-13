@@ -1,44 +1,48 @@
-<div class="p-2 max-w-[960px] mx-auto">
-  <div class="flex justify-between items-center mb-6">
-    <h2 class="text-lg font-medium m-0 text-[#262626]">Meus Links</h2>
-    <button nz-button nzType="primary" routerLink="/new">
-      <span nz-icon nzType="plus"></span>
-      Novo Link
+<div class="max-w-[640px] mx-auto px-4 py-8">
+  <div class="font-mono text-[11px] uppercase tracking-widest text-[#888] mb-1">
+    // Arquivo Pessoal
+  </div>
+  <h1 class="font-mono font-bold text-4xl uppercase leading-none text-black mb-6">
+    SEUS<br>LINKS.
+  </h1>
+
+  <div class="mb-6">
+    <button class="font-mono font-bold uppercase tracking-wider text-[13px] px-5 py-2.5 border-2 border-black
+        bg-[#f5a623] text-black shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000]
+        active:translate-x-[3px] active:translate-y-[3px] active:shadow-none transition-all" routerLink="/new">
+      + Salvar Link
     </button>
   </div>
 
-  <nz-table [nzData]="links" [nzBordered]="false" [nzSize]="'middle'">
-    <thead>
-      <tr>
-        <th>URL</th>
-        <th>Descrição</th>
-        <th nzWidth="150px">Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (item of links; track item.id) {
-        <tr>
-          <td>
-            <a [href]="item.link" target="_blank" rel="noopener">{{ item.link }}</a>
-          </td>
-          <td>{{ item.description || '—' }}</td>
-          <td>
-            <div class="flex g-1">
-              <button nz-button nzType="link" (click)="edit(item.id)">Editar</button>
-              <button
-                nz-button
-                nzType="link"
-                nzDanger
-                nz-popconfirm
-                nzPopconfirmTitle="Deseja excluir este link?"
-                (nzOnConfirm)="delete(item.id)"
-              >
-                Excluir
-              </button>
-            </div>
-          </td>
-        </tr>
+  @if (links.length === 0) {
+    <div class="border-2 border-black bg-white shadow-[6px_6px_0_#000] p-12 text-center">
+      <div class="font-mono font-bold text-2xl uppercase tracking-widest text-black mb-2">VAZIO.</div>
+      <p class="font-mono text-[12px] text-[#888] m-0">Nenhum link salvo. Comece pelo botão acima.</p>
+    </div>
+  } @else {
+    <div class="flex flex-col gap-4">
+      @for (link of links; track link.id; let i = $index) {
+        <div class="border-2 border-black bg-white shadow-[6px_6px_0_#000] p-5">
+          <div class="flex justify-between items-start">
+            <span class="font-mono text-[11px] text-[#888] mb-2 block">
+              #{{ (i + 1).toString().padStart(3, '0') }}
+            </span>
+            <button class="border-2 border-black w-9 h-9 flex items-center justify-center
+                    bg-white hover:bg-black hover:text-[#f5a623] transition-colors" (click)="delete(link.id)">
+              X
+            </button>
+          </div>
+
+          <span class="font-mono font-bold text-sm uppercase underline text-black break-all block mb-2 cursor-pointer"
+            (click)="open(link.link)">
+            {{ link.link }} ↗
+          </span>
+
+          @if (link.description) {
+            <p class="font-mono text-[12px] text-[#444] m-0">{{ link.description }}</p>
+          }
+        </div>
       }
-    </tbody>
-  </nz-table>
+    </div>
+  }
 </div>

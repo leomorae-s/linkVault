@@ -1,24 +1,36 @@
-<div class="max-w-[480px] my-12 mx-auto p-8 bg-white rounded-lg border border-[#f0f0f0 shadow-sm]">
-  <h2 class="text-lg font-medium mb-6 text-[#262626]">{{ editingId ? 'Editar Link' : 'Novo Link' }}</h2>
+<div class="max-w-[480px] mx-auto px-4 py-8">
 
-  <form nz-form nzLayout="vertical" [formGroup]="form" (ngSubmit)="submit()">
-    <nz-form-item>
-      <nz-form-label nzRequired>URL</nz-form-label>
-      <nz-form-control nzErrorTip="Insira uma URL válida">
-        <input nz-input formControlName="link" placeholder="https://..." />
-      </nz-form-control>
-    </nz-form-item>
+  <div class="font-mono text-[11px] uppercase tracking-widest text-[#888] mb-1">
+    // Formulário
+  </div>
+  <h1 class="font-mono font-bold text-4xl uppercase leading-none text-black mb-6">
+    {{ editId ? 'EDITAR' : 'SALVAR' }}<br>UM LINK.
+  </h1>
 
-    <nz-form-item>
-      <nz-form-label>Descrição</nz-form-label>
-      <nz-form-control>
-        <input nz-input formControlName="description" placeholder="Descrição opcional" />
-      </nz-form-control>
-    </nz-form-item>
+  <div class="border-2 border-black bg-white shadow-[6px_6px_0_#000] p-6">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="flex flex-col gap-6">
 
-    <div class="flex justify-end gap-2 mt-2">
-      <button nz-button nzType="default" type="button" (click)="cancel()">Cancelar</button>
-      <button nz-button nzType="primary" type="submit" [disabled]="form.invalid">Salvar</button>
-    </div>
-  </form>
+        <app-input label="Link" placeholder="https://exemplo.com" type="url" [control]="getControl('link')" />
+
+        <app-input label="Descrição" placeholder="Sobre o que é este link..." [multiline]="true"
+          [control]="getControl('description')" />
+
+        <div class="flex flex-col gap-3 mt-2">
+          <app-button type="submit" variant="primary" [disabled]="form.invalid">
+            ✓ Salvar
+          </app-button>
+          <app-button type="button" variant="secondary" routerLink="/">
+            Cancelar
+          </app-button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <p class="font-mono text-[11px] text-[#888] mt-4">
+    [ DICA ] Algo legal que ainda irei decidir pra colocar aqui.
+  </p>
+
 </div>

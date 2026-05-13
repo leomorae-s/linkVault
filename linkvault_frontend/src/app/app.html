@@ -1,1 +1,22 @@
-<router-outlet />
+<div class="flex flex-col min-h-screen">
+
+  <header class="bg-[#f5a623] border-b-2 border-black flex justify-between items-center px-4 py-3 sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 border-2 border-black bg-black flex items-center justify-center font-mono font-bold text-[#f5a623]">
+        L
+      </div>
+      <span class="font-mono font-bold uppercase tracking-widest text-sm text-black">LinkVault</span>
+    </div>
+  </header>
+
+  <main class="flex-1 bg-[#f0ebe0]">
+    <router-outlet />
+  </main>
+
+  <footer class="bg-black px-4 py-3">
+    <span class="font-mono text-[11px] text-[#f5a623] uppercase tracking-widest">
+      LINKVAULT V1.0.
+    </span>
+  </footer>
+
+</div>

@@ -1,0 +1,54 @@
+<div class="border-2 border-black shadow-[6px_6px_0_#000] overflow-hidden">
+
+  @if (rows.length === 0) {
+  <div class="bg-white p-12 text-center">
+    <div class="font-mono font-bold text-2xl uppercase tracking-widest text-black mb-2">
+      VAZIO.
+    </div>
+    <p class="font-mono text-[12px] text-[#888] m-0">
+      Nenhum link salvo. Comece pelo botão acima.
+    </p>
+  </div>
+  } @else {
+  <table class="w-full border-collapse font-mono text-[12px]">
+    <thead>
+      <tr>
+        <th class="bg-black text-[#f5a623] uppercase tracking-widest text-[10px] font-bold px-3 py-2.5 text-left">URL
+        </th>
+        <th class="bg-black text-[#f5a623] uppercase tracking-widest text-[10px] font-bold px-3 py-2.5 text-left">
+          Descrição</th>
+        <th
+          class="bg-black text-[#f5a623] uppercase tracking-widest text-[10px] font-bold px-3 py-2.5 text-left w-[160px]">
+          Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows; track row.id) {
+      <tr class="border-b border-[#e0d8cc] hover:bg-[#fdf6e3] transition-colors">
+        <td class="px-3 py-2.5">
+          <a [attr.href]="row.link" target="_blank" rel="noopener" class="text-black underline break-all">
+            {{ row.link }}
+          </a>
+        </td>
+        <td class="px-3 py-2.5 text-[#444]">{{ row.description || '—' }}</td>
+        <td class="px-3 py-2.5">
+          <div class="flex gap-1.5">
+            <button
+              class="font-mono font-bold uppercase text-[11px] px-3 py-1.5 border-2 border-black bg-transparent hover:bg-black hover:text-[#f5a623] transition-colors"
+              (click)="edit.emit(row.id)">
+              Editar
+            </button>
+            <button
+              class="font-mono font-bold uppercase text-[11px] px-3 py-1.5 border-2 border-black bg-black text-[#f5a623] shadow-[3px_3px_0_#f5a623] hover:shadow-[1px_1px_0_#f5a623] transition-all"
+              (click)="delete.emit(row.id)">
+              ✕
+            </button>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+
+</div>

@@ -1,56 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { InputComponent } from '../../shared/components/input/input';
+import { Button } from '../../shared/components/button/button';
 import { LinkService } from '../../services/linkService';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-link-form',
-  imports: [ReactiveFormsModule, NzFormModule, NzInputModule, NzButtonModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    InputComponent,
+    Button,
+  ],
   templateUrl: './link-form.html',
-  //styleUrl: './link-form.css',
 })
 export class LinkForm implements OnInit {
-
-  form!: FormGroup;
-  editingId: number | null = null;
+  form: FormGroup;
+  editId: number | null = null;
 
   constructor(
     private fb: FormBuilder,
-    private service: LinkService,
+    private router: Router,
     private route: ActivatedRoute,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
+    private service: LinkService
+  ) {
     this.form = this.fb.group({
-      link: ['', [Validators.required]],
-      description: ['']
+      link: ['', [Validators.required, Validators.pattern('https?://.+')]],
+      description: [''],
     });
-
-
-    this.editingId = Number(this.route.snapshot.paramMap.get('id')) || null;
   }
 
-  submit() {
+  ngOnInit(): void {
+    this.editId = Number(this.route.snapshot.paramMap.get('id')) || null;
+  }
+
+  getControl(name: string): FormControl {
+    return this.form.get(name) as FormControl;
+  }
+
+  submit(): void {
     if (this.form.invalid) return;
+    const payload = this.form.value;
 
-    const dto = this.form.value;
-
-    if (this.editingId) {
-      this.service.update(this.editingId, dto).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+    if (this.editId) {
+      this.service.update(this.editId, payload).subscribe(() => this.router.navigate(['/']));
     } else {
-      this.service.save(dto).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+      this.service.save(payload).subscribe(() => this.router.navigate(['/']));
     }
   }
 
-  cancel() {
+  cancel(): void {
     this.router.navigate(['/']);
   }
 }

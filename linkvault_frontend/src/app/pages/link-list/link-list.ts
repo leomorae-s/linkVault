@@ -1,44 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 import { LinkService, Link } from '../../services/linkService';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @Component({
   selector: 'app-link-list',
   standalone: true,
-  imports: [NzTableModule, NzButtonModule, NzPopconfirmModule, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './link-list.html',
-  //styleUrl: './link-list.css',
 })
-export class LinkList implements OnInit{
-
+export class LinkList implements OnInit {
   links: Link[] = [];
 
   constructor(
+    private router: Router, 
     private service: LinkService,
-    private router: Router
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.loadLinks();
   }
 
-  loadLinks() {
-    this.service.getAll().subscribe((page:any) => {
-      this.links = page.content;
+  loadLinks(): void {
+    this.service.getAll().subscribe({
+      next: (page) => {
+        if (page && page.content) {
+          this.links = page.content;
+          this.cdr.detectChanges(); 
+        }
+      },
+      error: (err) => console.error('Erro ao carregar links:', err)
     });
   }
 
-  edit(id: number) {
-    this.router.navigate(['/edit', id]);
+  open(url: string): void {
+    window.open(url, '_blank', 'noopener');
   }
 
-  delete(id:number) {
+  delete(id: number): void {
     this.service.delete(id).subscribe(() => {
-      this.loadLinks();
+      this.links = this.links.filter(l => l.id !== id);
+      this.cdr.detectChanges();
     });
   }
 }
