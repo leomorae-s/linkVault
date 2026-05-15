@@ -40,12 +40,12 @@ public class LinkController {
     }
     
 
-    @GetMapping("/get")
+    @GetMapping(value = "/get", version = "1.0")
     public ResponseEntity<String> getTeste() {
         return ResponseEntity.ok("Teste executado");
     }
 
-    @PostMapping("/save")
+    @PostMapping(value = "/save", version = "1.0")
     public ResponseEntity<URI> save(@RequestBody @Valid LinkRequestDTO dto) {
         
         logger.log(Level.INFO, "Requisição recebida: "+dto);
@@ -61,14 +61,14 @@ public class LinkController {
         return ResponseEntity.ok().body(service.getAll(pageable));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", version = "1.0")
     public ResponseEntity<LinkResponseDTO> getMethodName(@PathVariable Integer id) {
 
         logger.log(Level.INFO, "Requisição recebida, id: "+id);
         return ResponseEntity.ok(service.getLinkById(id));
     }
     
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}", version = "1.0")
     public ResponseEntity<String> deleteLink(@PathVariable Integer id) {
 
         logger.log(Level.INFO, "Requisição recebida, id: "+id);
@@ -77,10 +77,10 @@ public class LinkController {
         return ResponseEntity.status(204).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", version = "1.0")
     public ResponseEntity<LinkResponseDTO> update(@PathVariable Integer id, @RequestBody LinkRequestDTO link) {
         
-        logger.log(Level.INFO, "Requisição recebida, id: "+id);
+        logger.log(Level.INFO, "Requisição recbida, id: "+id);
 
         return ResponseEntity.ok(service.update(link, id));
         
