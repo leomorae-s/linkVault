@@ -1,0 +1,42 @@
+@if (isOpen) {
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+    <div class="border-2 border-black bg-white shadow-[6px_6px_0_#000] w-full max-w-[480px]">
+
+
+        <div class="p-6 pb-2">
+            <div class="font-mono text-[11px] uppercase tracking-widest text-[#888] mb-1">
+                // {{ config.subtitle ?? 'Confirmação' }}
+            </div>
+            <h2 class="font-mono font-bold text-4xl uppercase leading-none text-black mb-4">
+                {{ config.title }}
+            </h2>
+            @if (config.description) {
+            <p class="font-mono text-[12px] text-[#444] mb-0">{{ config.description }}</p>
+            }
+        </div>
+
+
+        <div class="p-6 flex flex-col gap-3">
+            <button (click)="confirm()" [class]="confirmClass">
+                {{ config.confirmLabel ?? 'CONFIRMAR' }}
+            </button>
+
+            @if (config.cancelLabel !== null) {
+            <button (click)="cancel()" class="font-mono font-bold uppercase tracking-wider text-[13px] px-5 py-2.5 w-full
+                   border-2 border-black bg-white text-black
+                   shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000]
+                   active:translate-x-[3px] active:translate-y-[3px] active:shadow-none transition-all">
+                {{ config.cancelLabel ?? 'CANCELAR' }}
+            </button>
+            }
+        </div>
+
+        @if (config.hint) {
+        <div class="border-t-2 border-black px-6 py-3">
+            <p class="font-mono text-[11px] text-[#888]">[ DICA ] {{ config.hint }}</p>
+        </div>
+        }
+
+    </div>
+</div>
+}

@@ -5,7 +5,6 @@
   <h1 class="font-mono font-bold text-4xl uppercase leading-none text-black mb-6">
     SEUS<br>LINKS.
   </h1>
-
   <div class="mb-6">
     <button class="font-mono font-bold uppercase tracking-wider text-[13px] px-5 py-2.5 border-2 border-black
         bg-[#f5a623] text-black shadow-[4px_4px_0_#000] hover:shadow-[2px_2px_0_#000]
@@ -28,16 +27,14 @@
           #{{ (i + 1).toString().padStart(3, '0') }}
         </span>
         <button class="border-2 border-black w-9 h-9 flex items-center justify-center
-                    bg-white hover:bg-black hover:text-[#f5a623] transition-colors" (click)="delete(link.id)">
+                bg-white hover:bg-black hover:text-[#f5a623] transition-colors" (click)="openDeleteDialog(link.id)">
           X
         </button>
       </div>
-
       <span class="font-mono font-bold text-sm uppercase underline text-black break-all block mb-2 cursor-pointer"
         (click)="open(link.link)">
         {{ link.link }} ↗
       </span>
-
       @if (link.description) {
       <p class="font-mono text-[12px] text-[#444] m-0">{{ link.description }}</p>
       }
@@ -46,3 +43,6 @@
   </div>
   }
 </div>
+
+<app-popup [isOpen]="showDeleteDialog" [config]="deleteConfig" (confirmed)="onDeleteConfirmed()"
+  (cancelled)="onDeleteCancelled()" />
