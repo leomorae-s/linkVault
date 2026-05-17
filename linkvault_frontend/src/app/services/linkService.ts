@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { enviroment } from '../../enviroment/enviroment';
 
@@ -37,24 +37,26 @@ export interface Page<T> {
 })
 export class LinkService {
   private readonly API = enviroment.apiUrl;
+  private readonly HEADERS = new HttpHeaders({"API-VERSION": "1.0"})
+  private readonly OPTIONS = {headers: this.HEADERS}
 
   constructor(private http: HttpClient) { }
 
 
   getAll(): Observable<any> {
-    return this.http.get<any>(this.API);
+    return this.http.get<any>(this.API, this.OPTIONS);
 
   }
 
   save(dto: LinkRequest): Observable<void> {
-    return this.http.post<void>(`${this.API}/save`, dto);
+    return this.http.post<void>(`${this.API}/save`, dto, this.OPTIONS);
   }
 
   update(id: number, dto: LinkRequest): Observable<Link> {
-    return this.http.put<Link>(`${this.API}/${id}`, dto);
+    return this.http.put<Link>(`${this.API}/${id}`, dto, this.OPTIONS);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.API}/delete/${id}`)
+    return this.http.delete<void>(`${this.API}/delete/${id}`, this.OPTIONS);
   }
 }
