@@ -15,34 +15,34 @@
   </div>
 
   @if (links.length === 0) {
-    <div class="border-2 border-black bg-white shadow-[6px_6px_0_#000] p-12 text-center">
-      <div class="font-mono font-bold text-2xl uppercase tracking-widest text-black mb-2">VAZIO.</div>
-      <p class="font-mono text-[12px] text-[#888] m-0">Nenhum link salvo. Comece pelo botão acima.</p>
-    </div>
+  <div class="border-2 border-black bg-white shadow-[6px_6px_0_#000] p-12 text-center">
+    <div class="font-mono font-bold text-2xl uppercase tracking-widest text-black mb-2">VAZIO.</div>
+    <p class="font-mono text-[12px] text-[#888] m-0">Nenhum link salvo. Comece pelo botão acima.</p>
+  </div>
   } @else {
-    <div class="flex flex-col gap-4">
-      @for (link of links; track link.id; let i = $index) {
-        <div class="border-2 border-black bg-white shadow-[6px_6px_0_#000] p-5">
-          <div class="flex justify-between items-start">
-            <span class="font-mono text-[11px] text-[#888] mb-2 block">
-              #{{ (i + 1).toString().padStart(3, '0') }}
-            </span>
-            <button class="border-2 border-black w-9 h-9 flex items-center justify-center
+  <div class="flex flex-col gap-4">
+    @for (link of links; track link.id; let i = $index) {
+    <div class="border-2 border-black bg-white shadow-[6px_6px_0_#000] p-5">
+      <div class="flex justify-between items-start">
+        <span class="font-mono text-[11px] text-[#888] mb-2 block">
+          #{{ (i + 1).toString().padStart(3, '0') }}
+        </span>
+        <button class="border-2 border-black w-9 h-9 flex items-center justify-center
                     bg-white hover:bg-black hover:text-[#f5a623] transition-colors" (click)="delete(link.id)">
-              X
-            </button>
-          </div>
+          X
+        </button>
+      </div>
 
-          <span class="font-mono font-bold text-sm uppercase underline text-black break-all block mb-2 cursor-pointer"
-            (click)="open(link.link)">
-            {{ link.link }} ↗
-          </span>
+      <span class="font-mono font-bold text-sm uppercase underline text-black break-all block mb-2 cursor-pointer"
+        (click)="open(link.link)">
+        {{ link.link }} ↗
+      </span>
 
-          @if (link.description) {
-            <p class="font-mono text-[12px] text-[#444] m-0">{{ link.description }}</p>
-          }
-        </div>
+      @if (link.description) {
+      <p class="font-mono text-[12px] text-[#444] m-0">{{ link.description }}</p>
       }
     </div>
+    }
+  </div>
   }
 </div>
