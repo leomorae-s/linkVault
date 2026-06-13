@@ -12,7 +12,7 @@ Ambiente: Docker, Prometheus, Grafana, Linux
 
 # Milestone
    - [x] Configuração do ambiente de desenvolvimento da API
-   - [] Criação da versão inicial da API
-   - [] Criação do FronEnd Web angular
-   - [] Criação do app mobile
-   - [] Criação do modulo de encurtamento de URL
+   - [x] Criação da versão inicial da API
+   - [x] Criação do FronEnd Web angular
+   - [] Criação do app mobile (hiato)
+   - [] Criação do modulo de encurtamento de URL (proximo)
