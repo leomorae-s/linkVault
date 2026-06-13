@@ -38,7 +38,7 @@ public class LinkModel {
 	public LinkModel(){}
 	
 	
-	public Integer getid() {
+	public Integer getId() {
 		return id;
 	}
 	
