@@ -2,6 +2,7 @@ package com.moraes.LinkVault.link;
 
 
 
+import com.moraes.LinkVault.exceptions.LinkNotFoundException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.data.domain.Page;
@@ -49,7 +50,7 @@ public class LinkService {
     public LinkResponseDTO getLinkById(Integer id) {
 
         LinkModel returned = repository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Link não encontrado"));
+        .orElseThrow(LinkNotFoundException::new);
 
         return LinkResponseDTO.from(returned);
     }
@@ -64,7 +65,7 @@ public class LinkService {
 
         logger.info("atualizando objeto no banco de dados: {}", dto);
 
-        LinkModel model = repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        LinkModel model = repository.findById(id).orElseThrow(LinkNotFoundException::new);
 
         model.update(dto.link(), dto.description());
 
