@@ -50,11 +50,11 @@ public class LinkModel {
 		return linkDescription;
 	}
 
-	public Instant updated() {
+	public Instant getUpdatedAt() {
 		return updatedAt;
 	}
 	
-	public Instant created() {
+	public Instant getCreatedAt() {
 		return createdAt;
 	}
 
