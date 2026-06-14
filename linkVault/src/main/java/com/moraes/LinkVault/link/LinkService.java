@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import com.moraes.LinkVault.link.dto.LinkRequestDTO;
 import com.moraes.LinkVault.link.dto.LinkResponseDTO;
-
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LinkService {
@@ -23,6 +23,7 @@ public class LinkService {
         this.repository = repository;
     }    
 
+    @Transactional
     public LinkResponseDTO save(LinkRequestDTO dto) {
 
 
@@ -35,6 +36,7 @@ public class LinkService {
 
     }
 
+    @Transactional(readOnly = true)
     public Page<LinkResponseDTO> getAll(Pageable pageable) {
         
         return repository.findAll(pageable)
@@ -43,6 +45,7 @@ public class LinkService {
     }
     
 
+    @Transactional(readOnly = true)
     public LinkResponseDTO getLinkById(Integer id) {
 
         LinkModel returned = repository.findById(id)
@@ -51,10 +54,12 @@ public class LinkService {
         return LinkResponseDTO.from(returned);
     }
 
+    @Transactional
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 
+    @Transactional
     public LinkResponseDTO update(LinkRequestDTO dto, Integer id) {
 
         logger.info("atualizando objeto no banco de dados: {}", dto);
