@@ -68,7 +68,6 @@ public class LinkService {
 
         model.update(dto.link(), dto.description());
 
-        repository.save(model);
 
         return LinkResponseDTO.from(model);
 
