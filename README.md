@@ -7,17 +7,19 @@
 ![Java](https://img.shields.io/badge/Java-Spring%20Boot%204-4CAF50?style=flat-square)
 ![Angular](https://img.shields.io/badge/Angular-20-1565C0?style=flat-square)
 ![Docker](https://img.shields.io/badge/Docker-Compose-0288D1?style=flat-square)
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange?style=flat-square)
+![Status](https://img.shields.io/badge/status-pausado-red?style=flat-square)
 
 </div>
 
 ---
 
+> ⏸️ **Aviso:** Este projeto está temporariamente pausado para foco no desenvolvimento do orquestrador local **Brise**. O próximo passo, ao retornar, será a implementação de testes.
+
 ## Sobre o projeto
 
 LinkVault é um projeto de estudos com foco em **observabilidade e métricas** em aplicações Java modernas. A ideia central é construir um vault pessoal de links relevantes, utilizando-o como laboratório para explorar na prática o `Spring Actuator`, `Prometheus` e `Grafana`.
 
-Futuramente o projeto receberá um módulo de encurtamento de URLs e funções padrões de apps modernos como autenticaão via jwt.
+Futuramente o projeto receberá um módulo de encurtamento de URLs e funções padrões de apps modernos como autenticação via jwt.
 
 ---
 
@@ -65,7 +67,8 @@ O projeto segue uma estrutura **Monolítica Modular**, privilegiando organizaç�
 - [x] Configuração do ambiente de desenvolvimento da API
 - [x] Criação da versão inicial da API
 - [x] Criação do frontend web em Angular
-- [ ] Módulo de encurtamento de URLs _(próximo)_
+- [ ] Implementação de testes automatizados _(próximo)_
+- [ ] Módulo de encurtamento de URLs
 - [ ] App mobile Android _(hiato)_
 
 ---
@@ -75,24 +78,7 @@ O projeto segue uma estrutura **Monolítica Modular**, privilegiando organizaç�
 O ambiente completo sobe via Docker Compose, incluindo a aplicação, banco de dados e o stack de observabilidade.
 
 ```bash
-git clone https://github.com/seu-usuario/linkvault
+git clone [https://github.com/seu-usuario/linkvault](https://github.com/seu-usuario/linkvault)
 cd linkvault
 cp .env.example .env
 docker compose up -d
-```
-
-> Certifique-se de configurar as variáveis de ambiente no `.env` antes de subir os containers.
-
----
-
-## Acessos locais
-
-| Serviço    | URL                       |
-|------------|---------------------------|
-| API        | http://localhost:8080     |
-| Frontend   | http://localhost:4200     |
-| Grafana    | http://localhost:3000     |
-| Prometheus | http://localhost:9090     |
-| pgAdmin    | http://localhost:5431     |
-
----
