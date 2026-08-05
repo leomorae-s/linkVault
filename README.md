@@ -75,10 +75,15 @@ O projeto segue uma estrutura **Monolítica Modular**, privilegiando organizaç�
 
 ## Como rodar
 
-O ambiente completo sobe via Docker Compose, incluindo a aplicação, banco de dados e o stack de observabilidade.
+O ambiente completo sobe via Docker Compose, incluindo a aplicação, banco de dados e o stack de observabilidade. Front-end ainda será conteinerizado.
 
 ```bash
-git clone [https://github.com/seu-usuario/linkvault](https://github.com/seu-usuario/linkvault)
+git clone [https://github.com/leomorae-s/linkvault](https://github.com/leomorae-s/linkvault)
 cd linkvault
+
 cp .env.example .env
+
 docker compose up -d
+```
+
+Nota: O ambiente completo sobe via Docker Compose (aplicação, banco e stack de observabilidade). O front-end ainda roda fora do container, aponte o caminho da API no environment.ts antes de iniciar.
